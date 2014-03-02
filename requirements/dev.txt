@@ -1,0 +1,5 @@
+-r base.txt
+bpython
+django-nose
+mock
+flake8

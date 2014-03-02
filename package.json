@@ -1,0 +1,16 @@
+{
+  "name": "hackathon",
+  "version": "0.0.0",
+  "description": "",
+  "dependencies": {
+    "coffee-script": "~1.7.1",
+    "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-concat": "~0.3.0",
+    "load-grunt-config": "*"
+  },
+  "author": "Joel Taddei, Spencer Herzberg, Jarrod Taylor",
+  "license": "ISC"
+}

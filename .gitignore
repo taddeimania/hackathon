@@ -1,0 +1,7 @@
+*.py[co]
+
+.local_db
+
+*.DS_Store
+CACHE/
+node_modules/
