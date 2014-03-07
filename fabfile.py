@@ -20,10 +20,11 @@ def uptime():
 
 @task
 def deploy():
+    run('git fetch -p')
+    run('git rebase origin/master')
+
     with cd('/home/ubuntu/hackathon'):
         sudo('cp deployment/hackathon.conf /etc/init/hackathon.conf')
-        run('git fetch -p')
-        run('git rebase origin/master')
         run('virtualenv/bin/pip install -r requirements/base.txt')
 
     sudo('service hackathon restart')
