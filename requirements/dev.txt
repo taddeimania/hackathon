@@ -3,3 +3,4 @@ bpython
 django-nose
 mock
 flake8
+fabric
