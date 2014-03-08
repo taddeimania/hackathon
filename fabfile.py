@@ -21,10 +21,12 @@ def uptime():
 @task
 def deploy():
     with cd('/home/ubuntu/hackathon'):
+        run("find . -name '*.pyc' -exec rm {} \;")
         run('git fetch -p')
         run('git rebase origin/master')
         sudo('cp deployment/hackathon.conf /etc/init/hackathon.conf')
         run('virtualenv/bin/pip install -r requirements/base.txt')
-
+        run("npm install")
+        run("node_modules/.bin/grunt")
     sudo('service hackathon restart')
     sudo('service nginx restart')
