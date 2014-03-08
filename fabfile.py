@@ -26,7 +26,12 @@ def deploy():
         run('git rebase origin/master')
         sudo('cp deployment/hackathon.conf /etc/init/hackathon.conf')
         run('virtualenv/bin/pip install -r requirements/base.txt')
-        run("npm install")
-        run("node_modules/.bin/grunt")
+        #run("npm install")
+        #run("node_modules/.bin/grunt")
+    restart()
+
+
+@task
+def restart():
     sudo('service hackathon restart')
     sudo('service nginx restart')
