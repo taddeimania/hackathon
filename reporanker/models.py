@@ -5,7 +5,7 @@ from django.conf import settings
 
 class BaseModel(models.Model):
     date_added = models.DateTimeField(auto_now_add=True, auto_now=False)
-    date_updated = models.DateTimeField(auto_now=False)
+    date_updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True
@@ -29,6 +29,9 @@ class Repo(BaseModel):
     language = models.CharField(max_length=255)
 
     open_issue_count = models.BigIntegerField()
+
+    def __unicode__(self):
+        return "<Repo {}>".format(self.full_name)
 
 
 class Review(BaseModel):
