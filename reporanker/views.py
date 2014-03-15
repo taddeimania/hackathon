@@ -1,4 +1,5 @@
 from vanilla.views import FormView, TemplateView
+from braces.views import LoginRequiredMixin
 
 from .forms import SearchForm
 
@@ -7,7 +8,7 @@ class IndexView(TemplateView):
     template_name = 'reporanker/index.html'
 
 
-class SearchView(FormView):
+class SearchView(LoginRequiredMixin, FormView):
     form_class = SearchForm
     template_name = 'reporanker/search.html'
 
