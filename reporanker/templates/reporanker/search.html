@@ -1,1 +1,14 @@
-SEARCH GOES HERE
+Search:
+
+<form action="." method="GET">
+	<input id="terms" name="terms" type="text" />
+</form>
+
+{% if results %}
+Results:
+
+{% for result in results %}
+	{{ result }}
+{% endfor %}
+
+{% endif %}
