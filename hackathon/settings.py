@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'reporanker',
+    'social.apps.django_app.default',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -81,3 +82,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'social.apps.django_app.context_processors.backends',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.github.GithubOAuth2',
+)
+
+SOCIAL_AUTH_USERNAME_FORM_HTML = 'username_signup.html'
+SOCIAL_AUTH_GITHUB_KEY = 'ae1fb7826e436880e49e'
+SOCIAL_AUTH_GITHUB_SECRET = 'f6e4fe3950acfaa0357cbb0e58ea84f0d31f0a16'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/reporanker/search/'
+LOGIN_ERROR_URL = '/login-error/'
