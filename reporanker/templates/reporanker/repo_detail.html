@@ -10,6 +10,16 @@ Open Issues Count: {{ object.open_issue_count }}<br />
 Language: {{ object.language }}<br />
 
 <br/>
+Add your own review!
+<form action="." method="POST">{% csrf_token %}
+        {{ form.errors }}
+        {% for field in form.fields %}
+        {{field.errors}}
+        {% endfor %}
+        {{ form.as_p }}
+        <input type="submit" name="Submit"/>
+</form>
+<br/>
 {% for review in object.review_set.all|slice:":10" %}
 Octocats: {{review.octocats}}<br/>
 Comment: {{review.comment}}<br/>
