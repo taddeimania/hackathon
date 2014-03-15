@@ -4,10 +4,12 @@
   "description": "",
   "dependencies": {
     "coffee-script": "~1.7.1",
+    "less": "*",
     "grunt": "~0.4.2",
     "grunt-cli": "~0.1.13",
     "grunt-contrib-coffee": "~0.10.1",
     "grunt-contrib-watch": "*",
+    "grunt-contrib-less": "*",
     "grunt-contrib-concat": "~0.3.0",
     "load-grunt-config": "*"
   },
