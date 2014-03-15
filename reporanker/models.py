@@ -26,7 +26,7 @@ class Repo(BaseModel):
     star_count = models.BigIntegerField()
     watchers_count = models.BigIntegerField()
     forks_count = models.BigIntegerField()
-    language = models.CharField(max_length=255)
+    language = models.CharField(max_length=255, blank=True, null=True)
 
     open_issue_count = models.BigIntegerField()
 
