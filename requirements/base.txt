@@ -3,3 +3,7 @@ South==0.8.3
 djangorestframework==2.3.12
 wsgiref==0.1.2
 gunicorn
+python-social-auth
+requests
+django-braces
+django-vanilla-views
