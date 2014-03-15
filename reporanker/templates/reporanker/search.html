@@ -1,15 +1,21 @@
-Search:
+{% extends 'reporanker/base.html' %}
 
-<form action="." method="GET">
-  <input id="terms" name="terms" type="text" />
-</form>
+{% block body_content %}
+<div class="search-container">
+  <div class="search-form">
+    <form action="." method="GET">
+      <input id="terms" name="terms" type="text" class="form-control" placeholder="Enter Repo Name"/>
+      <button id="search-btn" class="btn btn-lg btn-success">Search</button>
+    </form>
+  </div>
 
-{% for repo in repos %}
-<div>
-<h3>Repo <a href="{% url 'repo-detail-view' full_name=repo.full_name %}">{{repo.full_name}}</a></h3>
-  <p>Owner: {{repo.owner}}</p>
-  <p>Forks: {{repo.forks}}</p>
-  <p>Stars: {{repo.stars}}</p>
-  <p>Isues: {{repo.issues}}</p>
+  <div class="search-results-container">
+    {% for repo in repos %}
+      <div class="search-result">
+        <a href="{% url 'repo-detail-view' full_name=repo.full_name %}">{{repo.name}}</a>
+          <p>Owner: {{repo.owner}} Forks: {{repo.forks}} Stars: {{repo.stars}} Isues: {{repo.issues}}</p>
+      </div>
+    {% endfor %}
+  </div>
 </div>
-{% endfor %}
+{% endblock %}
