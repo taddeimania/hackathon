@@ -20,19 +20,8 @@
 
 <body>
   <div class="site-wrapper">
-
-    <div id="index-container">
-      <h1 class="cover-heading">RepoRanker</h1>
-      <p class="lead">Social Reviewing for GitHub repositories</p>
-      <p class="lead">
-        {% if user.username %}
-          <a class="btn btn-block btn-social btn-lg btn-linkedin" href="{% url 'search-view' %}"><i class="icon glyphicon glyphicon-search"></i> Search Repos</a>
-        {% else %}
-          <a class="btn btn-block btn-social btn-lg btn-linkedin" href="{% url 'social:begin' 'github' %}" > <i class="fa fa-github"></i> Sign in with GitHub</a>
-        {% endif %}
-      </p>
-    </div>
-
+     {% block body_content%}
+     {% endblock %}
   </div>
   <script src="{% static 'reporanker/js/dist/lib.min.js' %}"></script>
   <script src="{% static 'reporanker/js/dist/app.min.js' %}"></script>
