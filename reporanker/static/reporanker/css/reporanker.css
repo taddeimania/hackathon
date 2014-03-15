@@ -1,3 +1,6 @@
+#index-container {
+  padding: 5%;
+}
 p {
   color: grey;
 }
