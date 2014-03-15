@@ -16,6 +16,11 @@
       <div class="search-result">
         <a href="{% url 'repo-detail-view' slug=repo.full_name %}">{{repo.name}}</a>
         <p>{{repo.owner}} <span class="octocon octocon-forks"></span> {{repo.forks}} <span class="octocon octocon-stars"></span> {{repo.stars}} <span class="octocon octocon-issues"></span> {{repo.issues}}</p>
+        {% if repo.octocats %}
+        <p>{{ repo.octocats }}</p>
+        {% else %}
+        <!-- grey octocat -->
+        {% endif %}
       </div>
     {% endfor %}
   </div>

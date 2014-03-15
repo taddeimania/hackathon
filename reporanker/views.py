@@ -4,6 +4,7 @@ import requests
 from vanilla.views import FormView, TemplateView
 from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse
+from django.db.models import Avg
 
 from .forms import SearchForm, ReviewForm
 from .models import Repo
@@ -18,6 +19,11 @@ class SearchView(LoginRequiredMixin, FormView):
     form_class = SearchForm
     template_name = 'reporanker/search.html'
 
+    def get_average_octocats_for_repo(self, full_name):
+        repo = Repo.objects.filter(full_name=full_name)
+        if repo:
+            return int(round(repo[0].review_set.all().aggregate(Avg('octocats'))['octocats__avg']))
+
     def get_context_data(self, form=None):
         context = super(SearchView, self).get_context_data(form=form)
         terms = self.request.GET.get('terms', None)
@@ -28,6 +34,8 @@ class SearchView(LoginRequiredMixin, FormView):
             context['repos'] = []
             for repo in response['items']:
                 repo_contents = {}
+                repo_contents['octocats'] = self.get_average_octocats_for_repo(repo['full_name'])
+                print repo_contents['octocats']
                 repo_contents['full_name'] = repo['full_name']
                 repo_contents['name'] = repo['name']
                 repo_contents['owner'] = repo['owner']['login']
