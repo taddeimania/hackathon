@@ -33,6 +33,13 @@ class Repo(BaseModel):
     def __unicode__(self):
         return "<Repo {}>".format(self.full_name)
 
+    def ordered_review_set(self):
+        print 'hi'
+        results = Review.objects.raw('select * from reporanker_review where repo_id=%s', [self.id])
+        print len(results)
+        print results
+        return results
+
 
 class Review(BaseModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -43,3 +50,13 @@ class Review(BaseModel):
 
     class Meta:
         ordering = ('-date_added', )
+        unique_together = ('user', 'repo',)
+
+class ReviewOpinion(BaseModel):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    review = models.ForeignKey(Review)
+    helpful = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-date_added', )
+        unique_together = ('user', 'review',)
