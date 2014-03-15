@@ -95,6 +95,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 SOCIAL_AUTH_USERNAME_FORM_HTML = 'username_signup.html'
