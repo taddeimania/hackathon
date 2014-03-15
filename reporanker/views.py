@@ -42,15 +42,15 @@ class RepoDetailView(TemplateView):
     def get_context_data(self):
         context = super(RepoDetailView, self).get_context_data()
 
-        owner, repo = self.kwargs['owner'], self.kwargs['repo']
+        full_name = self.kwargs['full_name']
 
         try:
             repo = Repo.objects.get(
-                full_name="{}/{}".format(self.kwargs['owner'], self.kwargs['repo'])
+                full_name=full_name
             )
         except:
             #TODO: fire api request
-            url = 'https://api.github.com/repos/{0}/{1}'.format(owner, repo)
+            url = 'https://api.github.com/repos/{0}'.format(full_name)
             print url
             result = requests.get(url)
             response_json = result.text

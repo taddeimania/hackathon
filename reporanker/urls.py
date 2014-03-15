@@ -7,5 +7,5 @@ urlpatterns = patterns(
     '',
     url(r'^$', IndexView.as_view(), name='landing-page'),
     url(r'^search/$', SearchView.as_view(), name='search-view'),
-    url(r'^repo/(?P<owner>\w+)/(?P<repo>\w+)/$', RepoDetailView.as_view(), name='repo-detail-view'),
+    url(r'^repo/(?P<full_name>[\d\b\w\/.-]+)/$', RepoDetailView.as_view(), name='repo-detail-view'),
 )

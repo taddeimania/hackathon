@@ -6,7 +6,7 @@ Search:
 
 {% for repo in repos %}
 <div>
-  <h3>Repo {{repo.full_name}}</h3>
+<h3>Repo <a href="{% url 'repo-detail-view' full_name=repo.full_name %}">{{repo.full_name}}</a></h3>
   <p>Owner: {{repo.owner}}</p>
   <p>Forks: {{repo.forks}}</p>
   <p>Stars: {{repo.stars}}</p>
