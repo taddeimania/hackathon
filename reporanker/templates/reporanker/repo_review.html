@@ -1,0 +1,10 @@
+
+{% extends 'reporanker/base.html' %}
+
+
+{% block body_content %}
+<form action="." method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" name="Submit"/>
+</form>
+{% endblock %}

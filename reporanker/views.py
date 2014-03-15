@@ -3,9 +3,11 @@ import json
 import requests
 from vanilla.views import FormView, TemplateView
 from braces.views import LoginRequiredMixin
+from django.core.urlresolvers import reverse
 
 from .forms import SearchForm, ReviewForm
 from .models import Repo
+
 
 
 class IndexView(TemplateView):
@@ -36,25 +38,8 @@ class SearchView(LoginRequiredMixin, FormView):
         return context
 
 
-class RepoDetailView(LoginRequiredMixin, FormView):
-    form_class = ReviewForm
+class RepoDetailView(LoginRequiredMixin, TemplateView):
     template_name = 'reporanker/repo_detail.html'
-    success_url = ''
-
-    def post(self, *args, **kwargs):
-        kwargs.pop('slug')
-        return super(RepoDetailView, self).post(*args, **kwargs)
-
-    def form_valid(self, form):
-        form.save()
-        return super(RepoDetailView, self).form_valid(form)
-
-    def get_form(self, data=None, files=None, **kwargs):
-        user = self.request.user
-        repo = self.get_context_data()['object']
-        kwargs['initial'] = {'user': user, 'repo': repo}
-        form = super(RepoDetailView, self).get_form(data=data, files=files, **kwargs)
-        return form
 
     def get_context_data(self, form=None):
         context = super(RepoDetailView, self).get_context_data(form=form)
@@ -66,7 +51,6 @@ class RepoDetailView(LoginRequiredMixin, FormView):
             )
         except:
             url = 'https://api.github.com/repos/{0}'.format(full_name)
-            print url
             result = requests.get(url)
             response_json = result.text
             response = json.loads(response_json)
@@ -88,6 +72,34 @@ class RepoDetailView(LoginRequiredMixin, FormView):
                 open_issue_count=response['open_issues_count']
             )
 
+        context['user_reviewed'] = repo.review_set.filter(user=self.request.user).exists()
+
+
         context['object'] = repo
 
         return context
+
+
+class RepoReviewView(FormView):
+    form_class = ReviewForm
+    template_name = "reporanker/repo_review.html"
+    success_url = ""
+
+    def post(self, *args, **kwargs):
+        kwargs.pop('pk')
+        return super(RepoReviewView, self).post(*args, **kwargs)
+
+    def form_valid(self, form):
+        form.save()
+        return super(RepoReviewView, self).form_valid(form)
+
+    def get_success_url(self):
+        repo = Repo.objects.get(pk=self.kwargs.get('pk'))
+        return reverse("repo-detail-view", kwargs={'slug': repo.full_name})
+
+    def get_form(self, data=None, files=None, **kwargs):
+        user = self.request.user
+        repo = Repo.objects.get(pk=self.kwargs.get('pk'))
+        kwargs['initial'] = {'user': user, 'repo': repo}
+        form = super(RepoReviewView, self).get_form(data=data, files=files, **kwargs)
+        return form

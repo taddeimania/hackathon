@@ -115,4 +115,11 @@ body {
 .search-result p {
   margin-bottom: 5px;
 }
-/* -- End Search Page -- */
+ul {
+  list-style-type: none;
+}
+a,
+a.visited {
+  text-decoration: underline;
+  color: white;
+}
