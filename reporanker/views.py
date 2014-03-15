@@ -10,7 +10,6 @@ from .forms import SearchForm, ReviewForm
 from .models import Repo
 
 
-
 class IndexView(TemplateView):
     template_name = 'reporanker/index.html'
 
@@ -22,7 +21,9 @@ class SearchView(LoginRequiredMixin, FormView):
     def get_average_octocats_for_repo(self, full_name):
         repo = Repo.objects.filter(full_name=full_name)
         if repo:
-            return int(round(repo[0].review_set.all().aggregate(Avg('octocats'))['octocats__avg']))
+            review_average = repo[0].review_set.all().aggregate(Avg('octocats'))['octocats__avg']
+            if review_average:
+                return int(round(review_average))
 
     def get_context_data(self, form=None):
         context = super(SearchView, self).get_context_data(form=form)
@@ -81,10 +82,7 @@ class RepoDetailView(LoginRequiredMixin, TemplateView):
             )
 
         context['user_reviewed'] = repo.review_set.filter(user=self.request.user).exists()
-
-
         context['object'] = repo
-
         return context
 
 
