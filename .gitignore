@@ -1,4 +1,5 @@
 *.py[co]
+db.sqlite3
 
 .local_db
 
