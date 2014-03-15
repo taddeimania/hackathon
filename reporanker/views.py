@@ -1,3 +1,6 @@
+import json
+
+import requests
 from vanilla.views import FormView, TemplateView
 from braces.views import LoginRequiredMixin
 
@@ -14,8 +17,12 @@ class SearchView(LoginRequiredMixin, FormView):
 
     def get_context_data(self, form=None):
         context = super(SearchView, self).get_context_data(form=form)
-
         terms = self.request.GET.get('terms', None)
         if terms:
-            context['results'] = ['one', 'two', 'three']
+            git_hub_search_url = 'https://api.github.com/search/repositories?q={}'.format(terms)
+            response_json = requests.get(git_hub_search_url).text
+            response = json.loads(response_json)
+            context['urls'] = []
+            for repo in response['items']:
+                context['urls'].append(repo['url'])
         return context

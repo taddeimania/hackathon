@@ -1,14 +1,14 @@
 Search:
 
 <form action="." method="GET">
-	<input id="terms" name="terms" type="text" />
+  <input id="terms" name="terms" type="text" />
 </form>
 
-{% if results %}
+{% if urls %}
 Results:
 
-{% for result in results %}
-	{{ result }}
+{% for url in urls %}
+  {{ url }}
 {% endfor %}
 
 {% endif %}
