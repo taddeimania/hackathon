@@ -12,7 +12,7 @@
   <div class="search-results-container">
     {% for repo in repos %}
       <div class="search-result">
-        <a href="{% url 'repo-detail-view' full_name=repo.full_name %}">{{repo.name}}</a>
+        <a href="{% url 'repo-detail-view' slug=repo.full_name %}">{{repo.name}}</a>
           <p>Owner: {{repo.owner}} Forks: {{repo.forks}} Stars: {{repo.stars}} Isues: {{repo.issues}}</p>
       </div>
     {% endfor %}
