@@ -1,10 +1,10 @@
 import json
 
 import requests
-from vanilla.views import FormView, TemplateView, TemplateView
+from vanilla.views import FormView, TemplateView
 from braces.views import LoginRequiredMixin
 
-from .forms import SearchForm
+from .forms import SearchForm, ReviewForm
 from .models import Repo
 
 
@@ -36,20 +36,36 @@ class SearchView(LoginRequiredMixin, FormView):
         return context
 
 
-class RepoDetailView(TemplateView):
+class RepoDetailView(LoginRequiredMixin, FormView):
+    form_class = ReviewForm
     template_name = 'reporanker/repo_detail.html'
 
-    def get_context_data(self):
-        context = super(RepoDetailView, self).get_context_data()
+    def post(self, *args, **kwargs):
+        print kwargs
+        print self.request.POST
+        kwargs.pop('slug')
+        return super(RepoDetailView, self).post(*args, **kwargs)
 
-        full_name = self.kwargs['full_name']
+    def form_valid(self, *args, **kwargs):
+        super(RepoDetailView, self).form_valid(*args, **kwargs)
+        raise Exception()
+
+    def get_form(self, data=None, files=None, **kwargs):
+        user = self.request.user
+        repo = self.get_context_data()['object']
+        kwargs['initial'] = {'user': user, 'repo': repo}
+        form = super(RepoDetailView, self).get_form(**kwargs)
+        return form
+
+    def get_context_data(self, form=None):
+        context = super(RepoDetailView, self).get_context_data(form=form)
+        full_name = self.kwargs['slug']
 
         try:
             repo = Repo.objects.get(
                 full_name=full_name
             )
         except:
-            #TODO: fire api request
             url = 'https://api.github.com/repos/{0}'.format(full_name)
             print url
             result = requests.get(url)
