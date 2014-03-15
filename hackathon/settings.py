@@ -102,5 +102,5 @@ SOCIAL_AUTH_GITHUB_KEY = 'ae1fb7826e436880e49e'
 SOCIAL_AUTH_GITHUB_SECRET = 'f6e4fe3950acfaa0357cbb0e58ea84f0d31f0a16'
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/reporanker/search/'
+LOGIN_REDIRECT_URL = '/search/'
 LOGIN_ERROR_URL = '/login-error/'
