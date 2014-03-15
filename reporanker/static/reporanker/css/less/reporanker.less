@@ -1,11 +1,19 @@
 /* -- colors -- */
+@div-header: #586873;
+@text: #353535;
+@div-header-text: #ECEEEF;
+
+/* -- font-faves -- */
+@font-face {
+    font-family: "octocon";
+    src: url("../fonts/octicons.woff") format('woff');
+}
 
 html, body {
     height: 100%;
-    background-color: #333;
-    color: #fff;
 }
 
+/* -- Site -- */
 .site-wrapper {
     display: table;
     width: 320px;
@@ -13,18 +21,61 @@ html, body {
     min-height: 100%;
     margin: auto;
 }
+/* -- End Site -- */
 
+/* -- Index Page -- */
 .index-container {
     display: table-cell;
-    text-align: center;
     vertical-align: middle;
-    padding: 5%;
+    border-radius: 4px;
 }
 
+.index-content {
+    border-radius: 4px;
+    border: 1px solid #6e8290;
+}
+
+.div-header {
+    position: relative;
+    margin: 0;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    background-color: #6c8393;
+    border: 1px solid #6e8290;
+    border-bottom-color: #586873;
+    border-radius: 4px 4px 0 0;
+}
+
+.index-title {
+    margin-left: 9px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.tag-line {
+    margin-left: 9px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-social {
+    width: 95%;
+    margin: auto;
+    background-color: #E6E6E7;
+    color: @text;
+    &:hover {
+        background-color: #D9D9DB;
+        color: @text;
+    }
+}
+/* -- End Index Page -- */
+
+/* -- Search Page -- */
 .search-container {
     max-width: 320px;
     min-width: 320px;
     margin: auto;
+    margin-top: 10px;
 }
 
 #terms {
@@ -33,8 +84,16 @@ html, body {
 }
 
 #search-btn {
-    margin-top: 3px;
+    margin-top: 5px;
     width: 100%;
+}
+
+.seperator {
+    border-bottom: 1px solid @div-header;
+    height: 10px;
+    width: 350px;
+    margin-left: -12px;
+    margin-bottom: 10px;
 }
 
 .search-results-container {
@@ -44,14 +103,43 @@ html, body {
     word-wrap: break-word;
 }
 
-.search-result {
-
+.octocon {
+    font-family: octocon;
+    left: -1px;
+    color: #999999;
+    width: 16px;
+    text-align: center;
 }
 
-p {
-    color: grey;
-
-    h1 {
-        color: purple;
+.octocon-issues {
+    &:before {
+      content: "\f026";
     }
 }
+
+.octocon-forks {
+    &:before {
+      content: "\f098";
+    }
+}
+
+.octocon-stars {
+    &:before {
+      content: "\f02a";
+    }
+}
+
+.search-result {
+    background-color: #EDEDED;
+    border: 1px solid @div-header;
+    border-radius: 4px;
+    margin-top: 5px;
+    padding: 0 0 0 5px;
+    a {
+        font-size: 19px;
+    }
+    p {
+        margin-bottom: 5px;
+    }
+}
+/* -- End Search Page -- */

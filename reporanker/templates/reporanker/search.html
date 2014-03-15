@@ -5,15 +5,17 @@
   <div class="search-form">
     <form action="." method="GET">
       <input id="terms" name="terms" type="text" class="form-control" placeholder="Enter Repo Name"/>
-      <button id="search-btn" class="btn btn-lg btn-success">Search</button>
+      <button id="search-btn" class="btn btn-lg btn-primary">Search</button>
     </form>
   </div>
+
+  <div class="seperator"></div>
 
   <div class="search-results-container">
     {% for repo in repos %}
       <div class="search-result">
         <a href="{% url 'repo-detail-view' slug=repo.full_name %}">{{repo.name}}</a>
-          <p>Owner: {{repo.owner}} Forks: {{repo.forks}} Stars: {{repo.stars}} Isues: {{repo.issues}}</p>
+        <p>{{repo.owner}} <span class="octocon octocon-forks"></span> {{repo.forks}} <span class="octocon octocon-stars"></span> {{repo.stars}} <span class="octocon octocon-issues"></span> {{repo.issues}}</p>
       </div>
     {% endfor %}
   </div>

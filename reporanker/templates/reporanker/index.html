@@ -2,14 +2,18 @@
 
 {% block body_content %}
   <div class="index-container">
-    <h1 class="cover-heading">RepoRanker</h1>
-    <p class="lead">Social Reviews for GitHub repositories</p>
-    <p class="lead">
-      {% if user.username %}
-        <a class="btn btn-block btn-social btn-lg btn-linkedin" href="{% url 'search-view' %}"><i class="icon glyphicon glyphicon-search"></i> Search Repos</a>
-      {% else %}
-        <a class="btn btn-block btn-social btn-lg btn-linkedin" href="{% url 'social:begin' 'github' %}" > <i class="fa fa-github"></i> Sign in with GitHub</a>
-      {% endif %}
-    </p>
+    <div class="index-content">
+      <div class="div-header">
+        <h3 class="index-title">RepoRanker</h3>
+      </div>
+      <p class="tag-line lead">Social Reviews for GitHub repositories</p>
+      <p>
+        {% if user.username %}
+          <a class="btn btn-block btn-social btn-github" href="{% url 'search-view' %}"><i class="icon glyphicon glyphicon-search"></i> Search Repos</a>
+        {% else %}
+          <a class="btn btn-block btn-social btn-github" href="{% url 'social:begin' 'github' %}" > <i class="fa fa-github"></i> Sign in with GitHub</a>
+        {% endif %}
+      </p>
+    </div>
   </div>
 {% endblock %}
