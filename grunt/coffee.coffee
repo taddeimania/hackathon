@@ -3,4 +3,4 @@ module.exports =
     bare: true
   compile:
     files:
-      'reporanker/static/reporanker/js/dist/app.min.js': 'reporanker/static/reporanker/coffee/*.coffee'
+      'reporanker/static/reporanker/js/coffee.concat.js': 'reporanker/static/reporanker/coffee/*.coffee'

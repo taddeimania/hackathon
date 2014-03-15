@@ -1,14 +1,80 @@
 {% load staticfiles %}
-<html>
-<head>
-  <link rel="stylesheet" type="text/css" href="{% static 'reporanker/css/reporanker.css' %}">
-</head>
-<body>
-{% block content %}
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- favicon -->
+    <!-- <link rel="shortcut icon" href="http://getbootstrap.com/assets/ico/favicon.ico"> -->
 
-{% block js %}
+    <title>RepoRanker</title>
 
-{% endblock %}
-</body>
-</html>
+    <link href="{% static 'reporanker/css/lib/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'reporanker/css/lib/bootstrap-social.css' %}" rel="stylesheet">
+    <link href="{% static 'reporanker/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'reporanker/css/cover.css' %}" rel="stylesheet">
+    <link href="{% static 'reporanker/css/reporanker.css' %}" rel="stylesheet">
+    <link href="{% static 'reporanker/css/docs.css' %}" rel="stylesheet">
+
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <style id="holderjs-style" type="text/css"></style></head>
+
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <ul class="nav masthead-nav">
+                <li class="active"><a href="">home</a></li>
+                <li><a href="">search</a></li>
+                <li><a href="">login</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">RepoRanker</h1>
+            <p class="lead">Social Reviewing for GitHub repositories</p>
+            <p class="lead">
+              <a class="btn btn-block btn-social btn-linkedin">
+                <i class="fa fa-github"></i> Sign in with GitHub
+              </a>
+            </p>
+            <!-- or show this if logged in -->
+            <p class="lead">
+              <a href="" class="btn btn-lg btn-default">Search</a>
+            </p>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Cover template for <a href="http://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <script src="{% static 'reporanker/js/dist/lib.min.js' %}"></script>
+    <script src="{% static 'reporanker/js/dist/app.min.js' %}"></script>
+  
+
+</body></html>

@@ -1,5 +1,3 @@
-
-
 $(function () {
   var all_classes = "";
   var timer = undefined;
