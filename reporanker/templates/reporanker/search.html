@@ -4,11 +4,12 @@ Search:
   <input id="terms" name="terms" type="text" />
 </form>
 
-{% if urls %}
-Results:
-
-{% for url in urls %}
-  {{ url }}
+{% for repo in repos %}
+<div>
+  <h3>Repo {{repo.full_name}}</h3>
+  <p>Owner: {{repo.owner}}</p>
+  <p>Forks: {{repo.forks}}</p>
+  <p>Stars: {{repo.stars}}</p>
+  <p>Isues: {{repo.issues}}</p>
+</div>
 {% endfor %}
-
-{% endif %}

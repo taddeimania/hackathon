@@ -22,7 +22,14 @@ class SearchView(LoginRequiredMixin, FormView):
             git_hub_search_url = 'https://api.github.com/search/repositories?q={}'.format(terms)
             response_json = requests.get(git_hub_search_url).text
             response = json.loads(response_json)
-            context['urls'] = []
+            context['repos'] = []
             for repo in response['items']:
-                context['urls'].append(repo['url'])
+                repo_contents = {}
+                repo_contents['full_name'] = repo['full_name']
+                repo_contents['name'] = repo['name']
+                repo_contents['owner'] = repo['owner']['login']
+                repo_contents['forks'] = repo['forks']
+                repo_contents['stars'] = repo['stargazers_count']
+                repo_contents['issues'] = repo['open_issues_count']
+                context['repos'].append(repo_contents)
         return context
