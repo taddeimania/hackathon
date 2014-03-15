@@ -27,7 +27,7 @@ def deploy():
         sudo('cp deployment/hackathon.conf /etc/init/hackathon.conf')
         run('virtualenv/bin/pip install -r requirements/base.txt')
         #run("npm install")
-        #run("node_modules/.bin/grunt")
+        #run("grunt")
     restart()
 
 
