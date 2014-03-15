@@ -8,3 +8,11 @@ Watchers Count: {{ object.watchers_count }}<br />
 Forks Count: {{ object.forks_count }}<br />
 Open Issues Count: {{ object.open_issue_count }}<br />
 Language: {{ object.language }}<br />
+
+<br/>
+{% for review in object.review_set.all|slice:":10" %}
+Octocats: {{review.octocats}}<br/>
+Comment: {{review.comment}}<br/>
+{% empty %}
+There are no reviews yet
+{% endfor %}
