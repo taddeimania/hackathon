@@ -36,4 +36,4 @@ class Review(BaseModel):
     repo = models.ForeignKey(Repo)
 
     octocats = models.BigIntegerField(choices=(map(lambda x: (x, x,), range(1, 6))))
-    comment = models.TextField(max_length=4000)
+    comment = models.TextField(max_length=4000, blank=True, null=True)
