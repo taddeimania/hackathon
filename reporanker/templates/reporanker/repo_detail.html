@@ -37,21 +37,24 @@
       <div class="detail-review">
         <strong>Reviewer:</strong> {{review.user}}<br/>
         <strong>Octocat Rating:</strong> {{review.octocats}}<br/>
-        <strong>Comment:</strong> {{review.comment}}<br/>
-        {% if not review.reviewopinion_set.all %}
-          <button id='upvote' name='upvote' onclick='vote("up", {{review.pk}})'>Upvote</button>
-          &nbsp;
-          <button id='downvote' name='downvote' onclick='vote("down", {{review.pk}});'>Downvote</button>
-        {% endif %}
-        {% for opinion in review.reviewopinion_set.all %}
-          {% if opinion and opinion.user == request.user %}
-            {% if not opinion.helpful %}
-              <button id='upvote' name='upvote' onclick='vote("up", {{review.pk}})'>Upvote</button>
-            {% else %}
-              <button id='downvote' name='downvote' onclick='vote("down", {{review.pk}});'>Downvote</button>
-            {% endif %}
+        <div class="review-votes">
+          {% if not review.reviewopinion_set.all %}
+              <button id='upvote' name='upvote' class="upvote-btn" style="border: 0; background: transparent" onclick='vote("up", {{review.pk}})'><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
+              <button id='downvote' name='downvote' class="downvote-btn" style="border: 0; background: transparent" onclick='vote("down", {{review.pk}});'><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
           {% endif %}
-        {% endfor %}
+          {% for opinion in review.reviewopinion_set.all %}
+            {% if opinion and opinion.user == request.user %}
+              {% if not opinion.helpful %}
+                <button id='upvoted' name='upvoted' class="upvote-btn" style="border: 0; background: transparent"><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
+                <button id='downvote' name='downvote' class="downvote-btn" style="border: 0; background: transparent" onclick='vote("down", {{review.pk}});'><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
+              {% else %}
+                <button id='upvote' name='upvote' class="upvote-btn" style="border: 0; background: transparent" onclick='vote("up", {{review.pk}})'><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
+                <button id='downvoted' name='downvoted' class="downvote-btn" style="border: 0; background: transparent"><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        <strong>Comment:</strong> {{review.comment}}<br/>
       </div>
     {% endfor %}
     <script type="text/javascript">
