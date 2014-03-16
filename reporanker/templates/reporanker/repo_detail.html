@@ -39,12 +39,12 @@
         <strong>Octocat Rating:</strong> {{review.octocats}}<br/>
         <strong>Comment:</strong> {{review.comment}}<br/>
         {% if not review.reviewopinion_set.all %}
-            <button id='upvote' name='upvote' onclick='vote("up", {{review.pk}})'>Upvote</button>
-            &nbsp;
-            <button id='downvote' name='downvote' onclick='vote("down", {{review.pk}});'>Downvote</button>
+          <button id='upvote' name='upvote' onclick='vote("up", {{review.pk}})'>Upvote</button>
+          &nbsp;
+          <button id='downvote' name='downvote' onclick='vote("down", {{review.pk}});'>Downvote</button>
         {% endif %}
         {% for opinion in review.reviewopinion_set.all %}
-          {% if opinion %}
+          {% if opinion and opinion.user == request.user %}
             {% if not opinion.helpful %}
               <button id='upvote' name='upvote' onclick='vote("up", {{review.pk}})'>Upvote</button>
             {% else %}
