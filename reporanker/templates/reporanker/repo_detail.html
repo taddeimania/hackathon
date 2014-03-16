@@ -8,10 +8,9 @@
     </div>
 
     <div class="detail-body">
-      Owner: {{ object.owner_name }}<br/>
-      Language: {{ object.language }}<br/>
+      <strong>Owner:</strong> {{ object.owner_name }}<br/>
+      <strong>Language:</strong> {{ object.language }}<br/>
       {% if object.get_average_octocats %}
-      Octocats: {{ object.get_average_octocats }}<br/>
       {% endif %}
       <div>
         <span class="octocon octocon-stars"></span> {{ object.star_count }}
