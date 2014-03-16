@@ -28,6 +28,9 @@
                   <span class="glyphicon glyphicon-th-list"></span>
                 </button>
               </a>
+              {% if request.user.is_authenticated %}
+              <span class="pull-right username">{{ request.user }}</span>
+              {% endif %}
           </p>
         </div>
       </div>
