@@ -36,6 +36,7 @@
     {% for review in reviews %}
       <div class="detail-review">
         <strong>Reviewer:</strong> {{review.review.user}}<br/>
+        <strong>Date:</strong> {{review.review.date_added|date:"m/d/y"}}<br/>
         <strong>Octocat Rating:</strong> {{review.review.octocats}}<br/>
         <div class="review-votes">
           {% if not review.opinion %}
