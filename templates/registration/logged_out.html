@@ -1,0 +1,15 @@
+{% extends 'reporanker/base.html' %}
+
+{% block body_content %}
+  <div class="index-container">
+    <div class="index-content">
+      <div class="div-header">
+        <h3 class="index-title">Logged Out</h3>
+      </div>
+      <p></p>
+      <p>
+          <a class="btn btn-block btn-social btn-github" href="{% url 'social:begin' 'github' %}" > <i class="fa fa-github"></i>Log Back In</a>
+      </p>
+    </div>
+  </div>
+{% endblock %}
