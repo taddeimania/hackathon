@@ -30,7 +30,7 @@
       <div class="search-result">
         <a href="{% url 'repo-detail-view' slug=repo.full_name %}">{{repo.name}}</a>
         <p class="repo-owner">Owner: {{repo.owner}}</p>
-        <p><span class="octocon octocon-forks"></span> {{repo.forks}} <span class="octocon octocon-stars"></span> {{repo.stars}} <span class="octocon octocon-issues"></span> {{repo.issues}}</p>
+        <p><span class="octocon octocon-stars"></span> {{repo.stars}} <span class="octocon octocon-eye-watch"></span> {{repo.watchers}} <span class="octocon octocon-forks"></span> {{repo.forks}} <span class="octocon octocon-issues"></span> {{repo.issues}}</p>
         <div class="octo-icon">
           {% if repo.octocats %}
             <span><img src="{% static 'reporanker/img/octo_32_black.png' %}" alt="octo_cat">= {{repo.octocats}}</p></span>

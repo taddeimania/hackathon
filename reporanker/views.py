@@ -38,6 +38,7 @@ class SearchView(LoginRequiredMixin, FormView):
                 repo_contents['forks'] = repo['forks']
                 repo_contents['stars'] = repo['stargazers_count']
                 repo_contents['issues'] = repo['open_issues_count']
+                repo_contents['watchers'] = repo['watchers_count']
                 context['repos'].append(repo_contents)
         return context
 
