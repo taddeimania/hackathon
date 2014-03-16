@@ -27,11 +27,6 @@
 		    <a class="sb-toggle-left" href="#"><span class="glyphicon glyphicon-th-list"></span></a>
             </button>
           </p>
-          <p class="navbar-text navbar-right">
-            <button type="button" class="btn btn-default">
-		    <a href="/search"><span class="glyphicon glyphicon-search"></span></a>
-            </button>
-          </p>
         </div>
       </div>
     </nav>
@@ -47,7 +42,11 @@
         <li><img src="http://plugins.adchsm.me/slidebars/images/slidebars-logo-white@2x.png" alt="Slidebars" width="118" height="40"></li>
         <li><a href="/">Home</a></li>
         <li><a href="/search">Search</a></li>
-        <li><a href="/logout">Logout</a></li>
+	{% if request.user.is_authenticated %}
+	<li><a href="/logout">Logout ({{request.user.username}})</a></li>
+	{% else %}
+	<li><a href="/login">Login</a></li>
+	{% endif %}
         <li><small>RepoRanker &copy; 2014</small></li
       </ul>
     </nav>
