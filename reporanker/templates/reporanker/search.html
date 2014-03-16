@@ -10,8 +10,12 @@
 <div class="search-container">
   <div class="search-form">
     <form action="." method="GET">
-      <input id="terms" name="terms" type="text" class="form-control" placeholder="Enter Repo Name"/>
-      <button id="search-btn" class="btn btn-lg btn-primary">Search</button>
+      <div class="container">
+        <div class="row search-row">
+          <input id="terms" name="terms" type="text" class="form-control col-xs-11 col-sm-11" placeholder="Enter Repo Name"/>
+          <button id="search-btn" class="btn btn-lg btn-primary col-xs-1 col-sm-1"><i class="icon glyphicon glyphicon-search"></i></button>
+        </div>
+      </div>
     </form>
   </div>
 </div>
@@ -44,7 +48,7 @@
 <script type="text/javascript">
   $(".search-result").click(function(){
     $(this).attr('style', 'background-color: lightgrey');
-    window.location=$(this).find("a").attr("href"); 
+    window.location=$(this).find("a").attr("href");
     return false;
   });
 </script>
