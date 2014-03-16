@@ -88,12 +88,9 @@ class RepoDetailView(LoginRequiredMixin, TemplateView):
         reviews = []
         for review in repo.ordered_review_set().all()[:10]:
             user_opinion = review.reviewopinion_set.all().filter(user=self.request.user)
-            helpful = user_opinion[0].helpful if user_opinion else None
             item = {
                 'review': review,
-                'opinions': review.reviewopinion_set.all(),
-                'user_opinion': user_opinion,
-                'helpful': helpful
+                'opinion': user_opinion.get() if user_opinion else None,
             }
             reviews.append(item)
         context['reviews'] = reviews
@@ -141,4 +138,7 @@ class RepoRepView(FormView):
                 review=Review.objects.get(pk=post_data['review']),
                 helpful=helpful,
             )
+        print ReviewOpinion.objects.get(
+            user=self.request.user,
+            review=Review.objects.get(pk=post_data['review'])).helpful
         return http.HttpResponse(content=json.dumps({'vote': helpful}), content_type="application/json")
