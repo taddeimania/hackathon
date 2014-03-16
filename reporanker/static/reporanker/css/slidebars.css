@@ -21,6 +21,10 @@ html,body,#sb-site,.sb-slidebar{margin:0;padding:0;-webkit-box-sizing:border-box
  * 001 - Box Model
  */
 
+#sb-site {
+	min-height: 10000px !important;
+}
+
 * {
 	/* Highly recommended to avoid any width alterations in the Slidebars or Site, which may cause horizontal scrolling. */
 	-webkit-box-sizing: border-box;
