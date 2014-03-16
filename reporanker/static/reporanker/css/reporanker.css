@@ -189,10 +189,10 @@ body {
   top: -41px;
   left: -7px;
 }
-#upvoted {
+.upvoted {
   color: blue;
 }
-#downvoted {
+.downvoted {
   color: red;
 }
 /* -- End Repo Detail -- */

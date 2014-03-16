@@ -4,7 +4,7 @@
 {% block body_content %}
   <div class="detail-container">
     <div class="detail-header">
-	    <p><span class="detail-name"><a href="{{ object.html_url }}">{{ object.name }}</a></span> <span class="detail-description">{% if object.description%} - {{object.description}} {% endif %}</span></p>
+      <p><span class="detail-name"><a href="{{ object.html_url }}">{{ object.name }}</a></span> <span class="detail-description">- {{object.description}}</span></p>
     </div>
 
     <div class="detail-body">
@@ -39,61 +39,25 @@
         <strong>Octocat Rating:</strong> {{review.octocats}}<br/>
         <div class="review-votes">
           {% if not review.reviewopinion_set.all %}
-              <script type="text/javascript">
-              var voteResult = "none";
-              </script>
+              <button id='{{ opinion.id }}_upvote' name='upvote' class="upvote-btn" style="border: 0; background: transparent" onclick='vote("up", {{review.pk}})'><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
+              <button id='{{ opinion.id }}_downvote' name='downvote' class="downvote-btn" style="border: 0; background: transparent" onclick='vote("down", {{review.pk}});'><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
           {% endif %}
           {% for opinion in review.reviewopinion_set.all %}
             {% if opinion and opinion.user == request.user %}
               {% if not opinion.helpful %}
-              <script type="text/javascript">
-              var voteResult = "down";
-              </script>
+                <button id='{{ opinion.id }}_upvote' name='upvote' class="upvote-btn" style="border: 0; background: transparent" onclick='vote("up", {{review.pk}})'><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
+                <button id='{{ opinion.id }}_downvoted' name='downvoted' class="downvote-btn downvoted" style="border: 0; background: transparent"><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
               {% else %}
-              <script type="text/javascript">
-              var voteResult = "up";
-              </script>
+                <button id='{{ opinion.id }}_upvoted' name='upvoted' class="upvote-btn upvoted" style="border: 0; background: transparent"><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
+                <button id='{{ opinion.id }}_downvote' name='downvote' class="downvote-btn" style="border: 0; background: transparent" onclick='vote("down", {{review.pk}});'><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
               {% endif %}
             {% endif %}
           {% endfor %}
-          <div id="not-voted">
-            <button id='upvote' name='upvote' class="upvote-btn" style="border: 0; background: transparent" onclick='vote("up", {{review.pk}})'><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
-            <button id='downvote' name='downvote' class="downvote-btn" style="border: 0; background: transparent" onclick='vote("down", {{review.pk}});'><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
-          </div>
-          <div id="down-voted">
-            <button id='upvote' name='upvote' class="upvote-btn" style="border: 0; background: transparent" onclick='vote("up", {{review.pk}})'><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
-            <button id='downvoted' name='downvoted' class="downvote-btn" style="border: 0; background: transparent"><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
-          </div>
-          <div id="up-voted">
-            <button id='upvoted' name='upvoted' class="upvote-btn" style="border: 0; background: transparent"><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
-            <button id='downvote' name='downvote' class="downvote-btn" style="border: 0; background: transparent" onclick='vote("down", {{review.pk}});'><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
-          </div>
         </div>
         <strong>Comment:</strong> {{review.comment}}<br/>
       </div>
     {% endfor %}
-
-{% endblock %}
-
-{% block script %}
     <script type="text/javascript">
-      var toggleResult = function (){
-        if (voteResult === "up"){
-          $('#up-voted').show()
-          $('#not-voted').hide()
-          $('#down-voted').hide()
-        } else if (voteResult === "down"){
-          $('#up-voted').hide()
-          $('#not-voted').hide()
-          $('#down-voted').show()
-        } else if (voteResult === "none"){
-          $('#up-voted').show()
-          $('#not-voted').hide()
-          $('#down-voted').hide()
-        }
-      }
-      toggleResult();
-
       var token = '{{csrf_token}}';
       var vote = function(vote_verb, review){
         $.ajax({
@@ -105,15 +69,10 @@
             "csrfmiddlewaretoken": token
           },
           success: function(response){
-            if (vote_verb === "down"){
-              voteResult = "down";
-              toggleResult();
-            } else if (vote_verb === "up"){
-              voteResult = "up";
-              toggleResult();
-            }
+            window.location.reload();
           }
         });
       };
     </script>
+
 {% endblock %}
