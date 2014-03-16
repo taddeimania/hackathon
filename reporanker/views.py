@@ -91,6 +91,9 @@ class RepoDetailView(LoginRequiredMixin, TemplateView):
             item = {
                 'review': review,
                 'opinion': user_opinion.get() if user_opinion else None,
+                'opinions': review.reviewopinion_set.all(),
+                'helpful_count': review.reviewopinion_set.filter(helpful=True).count(),
+                'user_opinion': user_opinion
             }
             reviews.append(item)
         context['reviews'] = reviews

@@ -50,6 +50,9 @@ class Review(BaseModel):
     octocats = models.BigIntegerField(choices=(map(lambda x: (x, x,), range(1, 6))))
     comment = models.TextField(max_length=4000, blank=True, null=True)
 
+    def __unicode__(self):
+        return "{} - {}".format(self.user.username, self.repo.full_name)
+
     class Meta:
         ordering = ('-date_added', )
         unique_together = ('user', 'repo',)
