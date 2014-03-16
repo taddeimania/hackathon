@@ -35,9 +35,47 @@
 
     {% for review in object.ordered_review_set.all|slice:":10" %}
       <div class="detail-review">
+        <strong>Reviewer:</strong> {{review.user}}<br/>
         <strong>Octocat Rating:</strong> {{review.octocats}}<br/>
         <strong>Comment:</strong> {{review.comment}}<br/>
+        {% if review.user != request.user %}
+        {% if not review.reviewopinion_set.all %}
+            <button id='upvote' name='upvote' onclick='vote("up", {{review.pk}})'>Upvote</button>
+            &nbsp;
+            <button id='downvote' name='downvote' onclick='vote("down", {{review.pk}});'>Downvote</button>
+        {% endif %}
+        {% for opinion in review.reviewopinion_set.all %}
+          {% if opinion %}
+            {% if not opinion.helpful %}
+              <button id='upvote' name='upvote' onclick='vote("up", {{review.pk}})'>Upvote</button>
+            {% else %}
+              <button id='downvote' name='downvote' onclick='vote("down", {{review.pk}});'>Downvote</button>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        {% endif %}
       </div>
     {% endfor %}
+    <script type="text/javascript">
+      var token = '{{csrf_token}}';
+      var vote = function(vote_verb, review){
+        $.ajax({
+          type: "POST",
+          url: "/repo/rep/",
+          data: {
+            "vote": vote_verb,
+            "review": review,
+            "csrfmiddlewaretoken": token
+          },
+          success: function(response){
+            if(response.vote === true){
+              $("#upvote").hide();
+            }else{
+              $("#downvote").hide();
+            };
+          }
+        });
+      };
+    </script>
 
 {% endblock %}

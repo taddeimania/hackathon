@@ -42,7 +42,6 @@ class Repo(BaseModel):
             return int(round(review_average))
 
 
-
 class Review(BaseModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     repo = models.ForeignKey(Repo)

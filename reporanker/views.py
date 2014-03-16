@@ -1,13 +1,13 @@
 import json
 
 import requests
+from django import http
 from vanilla.views import FormView, TemplateView
 from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse
-from django.db.models import Avg
 
 from .forms import SearchForm, ReviewForm
-from .models import Repo
+from .models import Repo, ReviewOpinion, Review
 
 
 class IndexView(TemplateView):
@@ -79,6 +79,7 @@ class RepoDetailView(LoginRequiredMixin, TemplateView):
         context['user_reviewed'] = repo.review_set.filter(user=self.request.user).exists()
         context['average_octocats'] = repo.get_average_octocats()
         context['object'] = repo
+        context['request'] = self.request
         return context
 
 
@@ -105,3 +106,22 @@ class RepoReviewView(FormView):
         kwargs['initial'] = {'user': user, 'repo': repo}
         form = super(RepoReviewView, self).get_form(data=data, files=files, **kwargs)
         return form
+
+
+class RepoRepView(FormView):
+
+    def post(self, request, *args, **kwargs):
+        post_data = request.POST.dict()
+        helpful = bool('up' == post_data['vote'])
+        opinion = ReviewOpinion.objects.filter(
+            user=self.request.user,
+            review=Review.objects.get(pk=post_data['review']))
+        if opinion:
+            opinion.update(helpful=helpful)
+        else:
+            ReviewOpinion.objects.create(
+                user=self.request.user,
+                review=Review.objects.get(pk=post_data['review']),
+                helpful=helpful,
+            )
+        return http.HttpResponse(content=json.dumps({'vote': helpful}), content_type="application/json")
