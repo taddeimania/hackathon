@@ -36,7 +36,6 @@ class SearchView(LoginRequiredMixin, FormView):
             for repo in response['items']:
                 repo_contents = {}
                 repo_contents['octocats'] = self.get_average_octocats_for_repo(repo['full_name'])
-                print repo_contents['octocats']
                 repo_contents['full_name'] = repo['full_name']
                 repo_contents['name'] = repo['name']
                 repo_contents['owner'] = repo['owner']['login']

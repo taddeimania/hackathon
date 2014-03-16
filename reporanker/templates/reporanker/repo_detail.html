@@ -22,7 +22,7 @@ Desctipion: {{ object.description }}<br />
 <a href="{% url 'repo-review-view' object.id %}"> Add your own review!  </a>
 {% endif %}
 <br/>
-{% for review in object.review_set.all|slice:":10" %}
+{% for review in object.ordered_review_set.all|slice:":10" %}
 Octocats: {{review.octocats}}<br/>
 Comment: {{review.comment}}<br/>
 {% empty %}

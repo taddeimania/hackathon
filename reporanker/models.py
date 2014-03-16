@@ -33,6 +33,9 @@ class Repo(BaseModel):
     def __unicode__(self):
         return "<Repo {}>".format(self.full_name)
 
+    def ordered_review_set(self):
+        return Review.objects.annotate(total=Sum('reviewopinion__helpful')).order_by('total')
+
 
 class Review(BaseModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -43,3 +46,14 @@ class Review(BaseModel):
 
     class Meta:
         ordering = ('-date_added', )
+        unique_together = ('user', 'repo',)
+
+
+class ReviewOpinion(BaseModel):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    review = models.ForeignKey(Review)
+    helpful = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-date_added', )
+        unique_together = ('user', 'review',)
