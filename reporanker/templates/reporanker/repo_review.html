@@ -3,8 +3,33 @@
 
 
 {% block body_content %}
-<form action="." method="POST">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" name="Submit"/>
-</form>
+<div class="create-review-container">
+  <div class="review-header">Review</div>
+  <div class="review-body">
+
+    {% if form.errors %}
+    <div class="errors-div">
+      {% for error in form.errors.values %}
+        <div id="errors" class="alert alert-danger">
+          <p>{{error.as_text}}</p>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form action="." method="POST">{% csrf_token %}
+      {{form.user}}
+      {{form.repo}}
+      <div class="octo-select">
+        <label for="id_octocats">Octocats:</label>
+        {{form.octocats}}
+      </div>
+      <div class="review-text">
+        <label for="id_comment">Review:</label>
+        {{form.comment}}
+      </div>
+      <input id="submit-review-btn" class="btn btn-success" type="submit" name="Submit"/>
+    </form>
+  </div>
+</div>
 {% endblock %}

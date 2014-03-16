@@ -13,6 +13,8 @@ class ReviewForm(forms.ModelForm):
         super(ReviewForm, self).__init__(**kwargs)
         self.fields['user'].widget = forms.HiddenInput()
         self.fields['repo'].widget = forms.HiddenInput()
+        self.fields['comment'].widget.attrs['class'] = 'form-control'
+        self.fields['octocats'].widget.attrs['class'] = 'form-control'
 
     class Meta:
         model = Review

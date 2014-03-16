@@ -180,3 +180,40 @@ body {
   left: -12px;
 }
 /* -- End Repo Detail -- */
+/* -- End Create Repo Review -- */
+.create-review-container {
+  margin-top: 15px;
+  border: 1px solid #586873;
+  border-radius: 4px;
+}
+.create-review-container .review-header {
+  position: relative;
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+  background-color: #6c8393;
+  border: 1px solid #6e8290;
+  border-bottom-color: #586873;
+  border-radius: 4px 4px 0 0;
+  padding-left: 7px;
+  font-size: 19px;
+}
+.create-review-container .octo-select {
+  margin-bottom: 10px;
+}
+.create-review-container .review-text {
+  margin-bottom: 10px;
+}
+.create-review-container .review-body {
+  padding: 5px;
+  background-color: #EDEDED;
+}
+.create-review-container .errors-div {
+  margin-top: 5px;
+  margin-bottom: -10px;
+}
+.create-review-container #submit-review-btn {
+  margin-bottom: 5px;
+  width: 100%;
+}
+/* -- End Create Repo Review -- */
