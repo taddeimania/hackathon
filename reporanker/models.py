@@ -34,7 +34,7 @@ class Repo(BaseModel):
         return "<Repo {}>".format(self.full_name)
 
     def ordered_review_set(self):
-        return Review.objects.annotate(total=Sum('reviewopinion__helpful')).order_by('total')
+        return Review.objects.annotate(total=models.Sum('reviewopinion__helpful')).order_by('total')
 
 
 class Review(BaseModel):
