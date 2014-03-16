@@ -52,6 +52,9 @@
           {% endif %}
         </div>
         <strong>Comment:</strong> {{review.review.comment}}<br/>
+        {% if review.helpful_count %}
+          <p class="helpful-count">{{review.helpful_count}} people found this review helpful.</p>
+        {% endif %}
       </div>
     {% endfor %}
     <script type="text/javascript">
