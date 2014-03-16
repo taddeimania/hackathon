@@ -141,7 +141,4 @@ class RepoRepView(FormView):
                 review=Review.objects.get(pk=post_data['review']),
                 helpful=helpful,
             )
-        print ReviewOpinion.objects.get(
-            user=self.request.user,
-            review=Review.objects.get(pk=post_data['review'])).helpful
         return http.HttpResponse(content=json.dumps({'vote': helpful}), content_type="application/json")
