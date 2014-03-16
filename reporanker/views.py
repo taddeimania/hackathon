@@ -59,6 +59,11 @@ class RepoDetailView(LoginRequiredMixin, TemplateView):
             response_json = result.text
             response = json.loads(response_json)
 
+            try:
+                description = str(response['description'])
+            except:
+                description = ''
+
             repo = Repo.objects.create(
                 name=response['name'],
                 full_name=response['full_name'],
@@ -67,7 +72,7 @@ class RepoDetailView(LoginRequiredMixin, TemplateView):
                 owner_gravatar_url=response['owner']['avatar_url'],
                 owner_url=response['owner']['url'],
                 html_url=response['html_url'],
-                description=response['description'],
+                description=description,
                 url=response['url'],
                 star_count=response['stargazers_count'],
                 watchers_count=response['watchers_count'],
