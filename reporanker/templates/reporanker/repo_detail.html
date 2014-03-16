@@ -29,7 +29,7 @@
 
     {% if not user_reviewed %}
     <div class="detail-review-none">
-      <p>There are no reviews yet <a href="{% url 'repo-review-view' object.id %}">Click to be the first!  </a></p>
+      <p>You have not reviewed this repo yet. <a href="{% url 'repo-review-view' object.id %}">Submit your own</a></p>
     </div>
     {% endif %}
 
