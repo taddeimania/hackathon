@@ -1,6 +1,9 @@
 module.exports =
   lib:
-    src: ['reporanker/static/reporanker/js/lib/jquery-1.11.0.min.js']
+    src: [
+      'reporanker/static/reporanker/js/lib/jquery-1.11.0.min.js',
+      'reporanker/static/reporanker/js/lib/Slidebars/slidebars/0.9/slidebars.min.js'
+    ]
     dest: 'reporanker/static/reporanker/js/dist/lib.min.js'
   app:
     src: [

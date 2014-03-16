@@ -14,13 +14,45 @@
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
   <link href="{% static 'reporanker/css/font-awesome.css' %}" rel="stylesheet">
   <link href="{% static 'reporanker/css/reporanker.css' %}" rel="stylesheet">
+  <link href="{% static 'reporanker/css/slidebars.css' %}" rel="stylesheet">
 </head>
 
 <body>
-  <div class="site-wrapper">
-     {% block body_content%}
-     {% endblock %}
+  <div class="sb-site">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-collapse" id="bs-example-navbar-collapse-5">
+          <p class="navbar-text navbar">
+            <button type="button" class="btn btn-default">
+		    <a class="sb-toggle-left" href="#"><span class="glyphicon glyphicon-th-list"></span></a>
+            </button>
+          </p>
+          <p class="navbar-text navbar-right">
+            <button type="button" class="btn btn-default">
+		    <a href="/search"><span class="glyphicon glyphicon-search"></span></a>
+            </button>
+          </p>
+        </div>
+      </div>
+    </nav>
+    <div class="site-wrapper">
+      {% block body_content%}
+      {% endblock %}
+    </div>
   </div>
+
+  <div class="sb-slidebar sb-left sb-active">
+    <nav>
+      <ul class="sb-menu">
+        <li><img src="http://plugins.adchsm.me/slidebars/images/slidebars-logo-white@2x.png" alt="Slidebars" width="118" height="40"></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <li><small>RepoRanker &copy; 2014</small></li
+      </ul>
+    </nav>
+  </div>
+
   <script src="{% static 'reporanker/js/dist/lib.min.js' %}"></script>
   <script src="{% static 'reporanker/js/dist/app.min.js' %}"></script>
 </body>
