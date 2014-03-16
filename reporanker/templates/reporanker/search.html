@@ -10,9 +10,11 @@
     </form>
   </div>
 
-  <div class="seperator"></div>
 
   <div class="search-results-container">
+    {% if repos %}
+      <div class="seperator"></div>
+    {% endif %}
     {% for repo in repos %}
       <div class="search-result">
         <a href="{% url 'repo-detail-view' slug=repo.full_name %}">{{repo.name}}</a>
