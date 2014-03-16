@@ -60,6 +60,7 @@ WSGI_APPLICATION = 'hackathon.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'HOST': os.environ.get('DB_1_PORT_3306_TCP_ADDR', 'localhost'),
         'NAME': 'hacker',
         'USER': 'root',
         'PASSWORD': ''
