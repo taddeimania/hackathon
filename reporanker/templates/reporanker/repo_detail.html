@@ -1,4 +1,5 @@
 {% extends 'reporanker/base.html' %}
+{% load staticfiles %}
 
 {% block body_content %}
   <div class="detail-container">
@@ -18,17 +19,24 @@
         <span class="octocon octocon-forks"></span>  {{ object.forks_count }}
         <span class="octocon octocon-issues"></span> {{ object.open_issue_count }}
       </div>
+      <div class="octo-icon-detail">
+        {% if average_octocats %}
+          <span><img src="{% static 'reporanker/img/octo_32_black.png' %}" alt="octo_cat">= {{average_octocats}}</p></span>
+        {% endif %}
+      </div>
     </div>
   </div>
 
     {% if not user_reviewed %}
-      <a href="{% url 'repo-review-view' object.id %}"> Add your own review!  </a> There are no reviews yet
+    <div class="detail-review-none">
+      <p>There are no reviews yet <a href="{% url 'repo-review-view' object.id %}">Click to be the first!  </a></p>
+    </div>
     {% endif %}
 
     {% for review in object.ordered_review_set.all|slice:":10" %}
       <div class="detail-review">
-        Octocat Rating: {{review.octocats}}<br/>
-        Comment: {{review.comment}}<br/>
+        <strong>Octocat Rating:</strong> {{review.octocats}}<br/>
+        <strong>Comment:</strong> {{review.comment}}<br/>
       </div>
     {% endfor %}
 
