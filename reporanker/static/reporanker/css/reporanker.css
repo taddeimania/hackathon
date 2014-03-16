@@ -102,6 +102,9 @@ body {
 .octocon-stars:before {
   content: "\f02a";
 }
+.octocon-eye-watch:before {
+  content: "\f01d";
+}
 .search-result {
   background-color: #EDEDED;
   border: 1px solid #586873;
@@ -115,6 +118,47 @@ body {
 .search-result p {
   margin-bottom: 5px;
 }
-ul {
-  list-style-type: none;
+.octo-icon {
+  float: right;
+  position: relative;
+  top: -42px;
+  left: -13px;
 }
+/* -- Repo Detail -- */
+.detail-container {
+  margin-top: 15px;
+  border: 1px solid #586873;
+  border-radius: 4px;
+}
+.detail-container .detail-header {
+  background-color: #6c8393;
+  line-height: 17px;
+  padding: 10px 7px 1px 7px;
+}
+.detail-container .detail-header a {
+  color: #fff;
+  text-decoration: underline;
+}
+.detail-container .detail-header h1 {
+  margin: 5px 0;
+}
+.detail-container .detail-header .detail-name {
+  font-size: 20px;
+}
+.detail-container .detail-header .detail-description {
+  font-size: 16px;
+}
+.detail-container .detail-body {
+  padding-left: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  line-height: 20px;
+}
+.detail-review {
+  border: 1px solid #586873;
+  border-radius: 4px;
+  background-color: #EDEDED;
+  margin-top: 5px;
+  padding-left: 7px;
+}
+/* -- End Repo Detail -- */

@@ -1,31 +1,32 @@
 {% extends 'reporanker/base.html' %}
 
 {% block body_content %}
-  <div class="text-center">
-    <h1 class="cover-heading"><a href="{{ object.html_url }}">{{ object.name }}</a></h1>
-    <hr/>
-  </div>
-  <div>
-    <ul>
-      <li><strong>Maintainer:</strong> {{ object.owner_name }}</li>
-      <li></li>
-  </div>
-Start Count: {{ object.star_count }}<br />
-Watchers Count: {{ object.watchers_count }}<br />
-Forks Count: {{ object.forks_count }}<br />
-Open Issues Count: {{ object.open_issue_count }}<br />
-Language: {{ object.language }}<br />
-Desctipion: {{ object.description }}<br />
+  <div class="detail-container">
+    <div class="detail-header">
+      <p><span class="detail-name"><a href="{{ object.html_url }}">{{ object.name }}</a></span> <span class="detail-description">- {{object.description}}</span></p>
+    </div>
 
-<br/>
-{% if not user_reviewed %}
-<a href="{% url 'repo-review-view' object.id %}"> Add your own review!  </a>
-{% endif %}
-<br/>
-{% for review in object.ordered_review_set.all|slice:":10" %}
-Octocats: {{review.octocats}}<br/>
-Comment: {{review.comment}}<br/>
-{% empty %}
-There are no reviews yet
-{% endfor %}
+    <div class="detail-body">
+      Owner: {{ object.owner_name }}<br/>
+      Language: {{ object.language }}<br/>
+      <div>
+        <span class="octocon octocon-stars"></span> {{ object.star_count }}
+        <span class="octocon octocon-eye-watch"></span> {{ object.watchers_count }}
+        <span class="octocon octocon-forks"></span>  {{ object.forks_count }}
+        <span class="octocon octocon-issues"></span> {{ object.open_issue_count }}
+      </div>
+    </div>
+  </div>
+
+    {% if not user_reviewed %}
+      <a href="{% url 'repo-review-view' object.id %}"> Add your own review!  </a> There are no reviews yet
+    {% endif %}
+
+    {% for review in object.ordered_review_set.all|slice:":10" %}
+      <div class="detail-review">
+        Octocat Rating: {{review.octocats}}<br/>
+        Comment: {{review.comment}}<br/>
+      </div>
+    {% endfor %}
+
 {% endblock %}

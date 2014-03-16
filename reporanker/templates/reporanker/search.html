@@ -1,4 +1,5 @@
 {% extends 'reporanker/base.html' %}
+{% load staticfiles %}
 
 {% block body_content %}
 <div class="search-container">
@@ -16,11 +17,13 @@
       <div class="search-result">
         <a href="{% url 'repo-detail-view' slug=repo.full_name %}">{{repo.name}}</a>
         <p>{{repo.owner}} <span class="octocon octocon-forks"></span> {{repo.forks}} <span class="octocon octocon-stars"></span> {{repo.stars}} <span class="octocon octocon-issues"></span> {{repo.issues}}</p>
-        {% if repo.octocats %}
-        <p>{{ repo.octocats }}</p>
-        {% else %}
-        <!-- grey octocat -->
-        {% endif %}
+        <div class="octo-icon">
+          {% if repo.octocats %}
+            <span><img src="{% static 'reporanker/img/octo_32_black.png' %}" alt="octo_cat">= {{repo.octocats}}</p></span>
+          {% else %}
+            <img src="{% static 'reporanker/img/octo_32_grey.png' %}" alt="octo_cat">= 0
+          {% endif %}
+        </div>
       </div>
     {% endfor %}
   </div>
