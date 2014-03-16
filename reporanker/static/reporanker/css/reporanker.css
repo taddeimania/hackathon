@@ -243,6 +243,8 @@ body {
 .create-review-container #submit-review-btn {
   margin-bottom: 5px;
   width: 100%;
+  background-color: #6c8393;
+  border-color: #6c8393;
 }
 /* -- End Create Repo Review -- */
 .navbar-text {
