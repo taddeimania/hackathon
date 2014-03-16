@@ -34,7 +34,7 @@ class Repo(BaseModel):
         return "<Repo {}>".format(self.full_name)
 
     def ordered_review_set(self):
-        return Review.objects.annotate(total=models.Sum('reviewopinion__helpful')).order_by('-total')
+        return Review.objects.filter(repo=self).annotate(total=models.Sum('reviewopinion__helpful')).order_by('-total')
 
     def get_average_octocats(self):
         review_average = self.review_set.all().aggregate(models.Avg('octocats'))['octocats__avg']
