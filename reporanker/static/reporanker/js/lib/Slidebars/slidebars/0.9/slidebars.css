@@ -67,7 +67,7 @@ body {
 	top: 0;
 	z-index: 0; /* Slidebars sit behind sb-site. */
 	visibility: hidden; /* Initially hide the Slidebars. */
-	background-color: #222222; /* Default Slidebars background colour, overwrite this with your own css. */
+	background-color: #6c8393; /* Default background colour, overwrite this with your own css. */
 }
 
 .sb-left {

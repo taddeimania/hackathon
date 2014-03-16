@@ -44,14 +44,14 @@
   <div class="sb-slidebar sb-left sb-active">
     <nav>
       <ul class="sb-menu">
-        <li><img src="http://plugins.adchsm.me/slidebars/images/slidebars-logo-white@2x.png" alt="Slidebars" width="118" height="40"></li>
+        <li><img src="{% static 'reporanker/img/ranker_logo.png' %}" alt="Slidebars" width="118" height="40"></li>
         <li><a href="/">Home</a></li>
         <li><a href="/search">Search</a></li>
-	{% if request.user.is_authenticated %}
-	<li><a href="/logout">Logout ({{request.user.username}})</a></li>
-	{% else %}
-	<li><a href="/login">Login</a></li>
-	{% endif %}
+        {% if request.user.is_authenticated %}
+        <li><a href="/logout">Logout ({{request.user.username}})</a></li>
+        {% else %}
+        <li><a href="/login">Login</a></li>
+        {% endif %}
         <li><small>RepoRanker &copy; 2014</small></li
       </ul>
     </nav>
