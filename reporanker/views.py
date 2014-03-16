@@ -18,13 +18,6 @@ class SearchView(LoginRequiredMixin, FormView):
     form_class = SearchForm
     template_name = 'reporanker/search.html'
 
-    def get_average_octocats_for_repo(self, full_name):
-        repo = Repo.objects.filter(full_name=full_name)
-        if repo:
-            review_average = repo[0].review_set.all().aggregate(Avg('octocats'))['octocats__avg']
-            if review_average:
-                return int(round(review_average))
-
     def get_context_data(self, form=None):
         context = super(SearchView, self).get_context_data(form=form)
         terms = self.request.GET.get('terms', None)
@@ -35,7 +28,10 @@ class SearchView(LoginRequiredMixin, FormView):
             context['repos'] = []
             for repo in response['items']:
                 repo_contents = {}
-                repo_contents['octocats'] = self.get_average_octocats_for_repo(repo['full_name'])
+
+                repos = Repo.objects.filter(full_name=repo['full_name'])
+                if repos:
+                    repo_contents['octocats'] = repos[0].get_average_octocats()
                 repo_contents['full_name'] = repo['full_name']
                 repo_contents['name'] = repo['name']
                 repo_contents['owner'] = repo['owner']['login']
@@ -81,6 +77,7 @@ class RepoDetailView(LoginRequiredMixin, TemplateView):
             )
 
         context['user_reviewed'] = repo.review_set.filter(user=self.request.user).exists()
+        context['average_octocats'] = repo.get_average_octocats()
         context['object'] = repo
         return context
 

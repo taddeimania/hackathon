@@ -36,6 +36,12 @@ class Repo(BaseModel):
     def ordered_review_set(self):
         return Review.objects.annotate(total=models.Sum('reviewopinion__helpful')).order_by('-total')
 
+    def get_average_octocats(self):
+        review_average = self.review_set.all().aggregate(models.Avg('octocats'))['octocats__avg']
+        if review_average:
+            return int(round(review_average))
+
+
 
 class Review(BaseModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
