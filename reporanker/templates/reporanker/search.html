@@ -32,3 +32,13 @@
   </div>
 </div>
 {% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  $(".search-result").click(function(){
+    $(this).attr('style', 'background-color: lightgrey');
+    window.location=$(this).find("a").attr("href"); 
+    return false;
+  });
+</script>
+{% endblock %}

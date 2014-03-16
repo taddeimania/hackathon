@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.conf import settings
+from django.dispatch import receiver
 
 
 class BaseModel(models.Model):
@@ -52,6 +53,11 @@ class Review(BaseModel):
     class Meta:
         ordering = ('-date_added', )
         unique_together = ('user', 'repo',)
+
+
+@receiver(models.signals.post_save, sender=Review)
+def push_payments_to_adapter_post_save(sender, instance, created, **kwargs):
+    ReviewOpinion.objects.create(user=instance.user, review=instance, helpful=True)
 
 
 class ReviewOpinion(BaseModel):
