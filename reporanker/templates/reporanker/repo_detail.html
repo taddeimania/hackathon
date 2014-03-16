@@ -33,28 +33,28 @@
     </div>
     {% endif %}
 
-    {% for review in object.ordered_review_set.all|slice:":10" %}
+    {% for review in reviews %}
       <div class="detail-review">
-        <strong>Reviewer:</strong> {{review.user}}<br/>
-        <strong>Octocat Rating:</strong> {{review.octocats}}<br/>
+        <strong>Reviewer:</strong> {{review.review.user}}<br/>
+        <strong>Octocat Rating:</strong> {{review.review.octocats}}<br/>
         <div class="review-votes">
-          {% if not review.reviewopinion_set.all %}
-              <button id='{{ opinion.id }}_upvote' name='upvote' class="upvote-btn" style="border: 0; background: transparent" onclick='vote("up", {{review.pk}})'><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
-              <button id='{{ opinion.id }}_downvote' name='downvote' class="downvote-btn" style="border: 0; background: transparent" onclick='vote("down", {{review.pk}});'><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
+          {% if not review.user_opinion %}
+              <button id='upvote' name='upvote' class="upvote-btn" style="border: 0; background: transparent" onclick='vote("up", {{review.review.pk}})'><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
+              <button id='downvote' name='downvote' class="downvote-btn" style="border: 0; background: transparent" onclick='vote("down", {{review.review.pk}});'><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
           {% endif %}
-          {% for opinion in review.reviewopinion_set.all %}
+          {% for opinion in review.opinions %}
             {% if opinion and opinion.user == request.user %}
               {% if not opinion.helpful %}
-                <button id='{{ opinion.id }}_upvote' name='upvote' class="upvote-btn" style="border: 0; background: transparent" onclick='vote("up", {{review.pk}})'><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
+                <button id='{{ opinion.id }}_upvote' name='upvote' class="upvote-btn" style="border: 0; background: transparent" onclick='vote("up", {{review.review.pk}})'><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
                 <button id='{{ opinion.id }}_downvoted' name='downvoted' class="downvote-btn downvoted" style="border: 0; background: transparent"><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
               {% else %}
                 <button id='{{ opinion.id }}_upvoted' name='upvoted' class="upvote-btn upvoted" style="border: 0; background: transparent"><i class="icon glyphicon glyphicon-thumbs-up"></i></button>
-                <button id='{{ opinion.id }}_downvote' name='downvote' class="downvote-btn" style="border: 0; background: transparent" onclick='vote("down", {{review.pk}});'><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
+                <button id='{{ opinion.id }}_downvote' name='downvote' class="downvote-btn" style="border: 0; background: transparent" onclick='vote("down", {{review.review.pk}});'><i class="icon glyphicon glyphicon-thumbs-down"></i></button>
               {% endif %}
             {% endif %}
           {% endfor %}
         </div>
-        <strong>Comment:</strong> {{review.comment}}<br/>
+        <strong>Comment:</strong> {{review.review.comment}}<br/>
       </div>
     {% endfor %}
     <script type="text/javascript">

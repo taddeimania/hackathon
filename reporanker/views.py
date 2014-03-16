@@ -80,6 +80,18 @@ class RepoDetailView(LoginRequiredMixin, TemplateView):
         context['average_octocats'] = repo.get_average_octocats()
         context['object'] = repo
         context['request'] = self.request
+        reviews = []
+        for review in repo.ordered_review_set().all()[:10]:
+            user_opinion = review.reviewopinion_set.all().filter(user=self.request.user)
+            helpful = user_opinion[0].helpful if user_opinion else None
+            item = {
+                'review': review,
+                'opinions': review.reviewopinion_set.all(),
+                'user_opinion': user_opinion,
+                'helpful': helpful
+            }
+            reviews.append(item)
+        context['reviews'] = reviews
         return context
 
 
